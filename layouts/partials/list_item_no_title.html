@@ -1,0 +1,33 @@
+<article class="post-single list-item">
+  <header class="post-header">
+    <h2 class="post-title"></h2>
+    <div class="post-meta">
+    </div>
+  </header>
+  <div class="post-content">
+    {{- partial "anchored_headings.html" .Content -}}
+  </div>
+  <footer class="post-footer">
+    {{- if not (.Param "hideMeta") }}
+    <div class="post-meta">
+      {{- partial "post_date.html" . }}
+      {{- partial "post_meta.html" . -}}
+      {{- partial "translation_list.html" . -}}
+      {{- partial "edit_post.html" . -}}
+      {{- if .Params.tags }}
+      <ul class="post-tags">
+        {{- range ($.GetTerms "tags") }}
+        <li><a href="{{ .Permalink }}">#{{ .LinkTitle }}</a></li>
+        {{- end }}
+      </ul>
+      {{- end }}
+    </div>
+    {{- end }}
+    {{- if (.Param "ShowPostNavLinks") }}
+    {{- partial "post_nav_links.html" . }}
+    {{- end }}
+    {{- if (and .Site.Params.ShowShareButtons (ne .Params.disableShare true)) }}
+    {{- partial "share_icons.html" . -}}
+    {{- end }}
+  </footer>
+</article>

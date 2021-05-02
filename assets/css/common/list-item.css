@@ -1,0 +1,9 @@
+.list-item-separator {
+    margin: 50px auto 25px auto;
+    border: 0;
+    border-top: 1px solid var(--secondary);
+}
+
+.list-item-separator:last-of-type {
+    display: none;
+}

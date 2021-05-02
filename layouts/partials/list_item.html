@@ -1,0 +1,41 @@
+<article class="post-single list-item">
+  <header class="post-header">
+    <a aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}">
+      <h2 class="post-title">
+        {{ .Title }}
+        {{- if .Draft }}<div class="entry-isdraft"><sup>&nbsp;&nbsp;[draft]</sup></div>{{- end }}
+      </h2>
+    </a>
+  </header>
+  <div class="post-content">
+    <p>
+      {{ .Summary | plainify | htmlUnescape }}
+    </p>
+    <p>
+      <a aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}">Continuar leyendo...</a>
+    </p>
+  </div>
+  <footer class="post-footer">
+    {{- if not (.Param "hideMeta") }}
+    <div class="post-meta">
+      {{- partial "post_date.html" . }}
+      {{- partial "post_meta.html" . -}}
+      {{- partial "translation_list.html" . -}}
+      {{- partial "edit_post.html" . -}}
+      {{- if .Params.tags }}
+      <ul class="post-tags">
+        {{- range ($.GetTerms "tags") }}
+        <li><a href="{{ .Permalink }}">#{{ .LinkTitle }}</a></li>
+        {{- end }}
+      </ul>
+      {{- end }}
+    </div>
+    {{- end }}
+    {{- if (.Param "ShowPostNavLinks") }}
+    {{- partial "post_nav_links.html" . }}
+    {{- end }}
+    {{- if (and .Site.Params.ShowShareButtons (ne .Params.disableShare true)) }}
+    {{- partial "share_icons.html" . -}}
+    {{- end }}
+  </footer>
+</article>
