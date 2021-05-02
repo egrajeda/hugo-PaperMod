@@ -41,8 +41,8 @@
 {{- end }}
 
 
-{{- if not .Title }}
-{{- partial "list_item_no_title.html" . }}
+{{- if (or (not .Title) (not .Truncated)) }}
+{{- partial "list_item_inline.html" . }}
 {{- else }}
 {{- partial "list_item.html" . }}
 {{- end }}
