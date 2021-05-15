@@ -21,6 +21,15 @@
     flex-wrap: wrap
 }
 
+.post-meta {
+    border-bottom: 1px solid var(--border);
+}
+
+.post-meta + .post-header,
+.post-meta + .post-content {
+    margin-top: 12px;
+}
+
 .post-meta .i18n_list li {
     display: inline-flex;
     list-style: none;

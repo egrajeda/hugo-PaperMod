@@ -1,6 +1,22 @@
 {{- define "main" }}
 
 <article class="post-single">
+  {{- if not (.Param "hideMeta") }}
+  <div class="post-meta">
+    {{- partial "post_date.html" . }}
+    {{- partial "post_meta.html" . -}}
+    {{- partial "translation_list.html" . -}}
+    {{- partial "edit_post.html" . -}}
+    {{- if .Params.tags }}
+    <ul class="post-tags">
+      {{- range ($.GetTerms "tags") }}
+      <li><a href="{{ .Permalink }}">#{{ .LinkTitle }}</a></li>
+      {{- end }}
+    </ul>
+    {{- end }}
+  </div>
+  {{- end }}
+  {{- if .Title }}
   <header class="post-header">
     {{ partial "breadcrumbs.html" . }}
     <h1 class="post-title">
@@ -12,14 +28,8 @@
       {{ .Description }}
     </div>
     {{- end }}
-    {{- if not (.Param "hideMeta") }}
-    <div class="post-meta">
-      {{- partial "post_meta.html" . -}}
-      {{- partial "translation_list.html" . -}}
-      {{- partial "edit_post.html" . -}}
-    </div>
-    {{- end }}
   </header>
+  {{- end }}
   {{- $isHidden := .Params.cover.hidden | default .Site.Params.cover.hiddenInSingle | default .Site.Params.cover.hidden }}
   {{- partial "cover.html" (dict "cxt" . "IsHome" false "isHidden" $isHidden) }}
   {{- if (.Param "ShowToc") }}
@@ -29,16 +39,6 @@
     {{- partial "anchored_headings.html" .Content -}}
   </div>
   <footer class="post-footer">
-    <div class="post-meta">
-      {{- partial "post_date.html" . }}
-      {{- if .Params.tags }}
-      <ul class="post-tags">
-        {{- range ($.GetTerms "tags") }}
-        <li><a href="{{ .Permalink }}">#{{ .LinkTitle }}</a></li>
-        {{- end }}
-      </ul>
-      {{- end }}
-    </div>
     {{- if (.Param "ShowPostNavLinks") }}
     {{- partial "post_nav_links.html" . }}
     {{- end }}

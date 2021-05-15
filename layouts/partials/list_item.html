@@ -1,4 +1,19 @@
 <article class="post-single list-item">
+  {{- if not (.Param "hideMeta") }}
+  <div class="post-meta">
+    {{- partial "post_date.html" . }}
+    {{- partial "post_meta.html" . -}}
+    {{- partial "translation_list.html" . -}}
+    {{- partial "edit_post.html" . -}}
+    {{- if .Params.tags }}
+    <ul class="post-tags">
+      {{- range ($.GetTerms "tags") }}
+      <li><a href="{{ .Permalink }}">#{{ .LinkTitle }}</a></li>
+      {{- end }}
+    </ul>
+    {{- end }}
+  </div>
+  {{- end }}
   <header class="post-header">
     <a aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}">
       <h2 class="post-title">
@@ -16,21 +31,6 @@
     </p>
   </div>
   <footer class="post-footer">
-    {{- if not (.Param "hideMeta") }}
-    <div class="post-meta">
-      {{- partial "post_date.html" . }}
-      {{- partial "post_meta.html" . -}}
-      {{- partial "translation_list.html" . -}}
-      {{- partial "edit_post.html" . -}}
-      {{- if .Params.tags }}
-      <ul class="post-tags">
-        {{- range ($.GetTerms "tags") }}
-        <li><a href="{{ .Permalink }}">#{{ .LinkTitle }}</a></li>
-        {{- end }}
-      </ul>
-      {{- end }}
-    </div>
-    {{- end }}
     {{- if (.Param "ShowPostNavLinks") }}
     {{- partial "post_nav_links.html" . }}
     {{- end }}

@@ -1,4 +1,18 @@
 <article class="post-single list-item">
+  <div class="post-meta">
+    {{- partial "post_date.html" . }}
+    {{- partial "post_meta.html" . -}}
+    {{- partial "translation_list.html" . -}}
+    {{- partial "edit_post.html" . -}}
+    {{- if .Params.tags }}
+    <ul class="post-tags">
+      {{- range ($.GetTerms "tags") }}
+      <li><a href="{{ .Permalink }}">#{{ .LinkTitle }}</a></li>
+      {{- end }}
+    </ul>
+    {{- end }}
+  </div>
+  {{- if .Title }}
   <header class="post-header">
     <a aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}">
       <h2 class="post-title">
@@ -6,28 +20,12 @@
         {{- if .Draft }}<div class="entry-isdraft"><sup>&nbsp;&nbsp;[draft]</sup></div>{{- end }}
       </h2>
     </a>
-    <div class="post-meta">
-    </div>
   </header>
+  {{- end }}
   <div class="post-content">
     {{- partial "anchored_headings.html" .Content -}}
   </div>
   <footer class="post-footer">
-    {{- if not (.Param "hideMeta") }}
-    <div class="post-meta">
-      {{- partial "post_date.html" . }}
-      {{- partial "post_meta.html" . -}}
-      {{- partial "translation_list.html" . -}}
-      {{- partial "edit_post.html" . -}}
-      {{- if .Params.tags }}
-      <ul class="post-tags">
-        {{- range ($.GetTerms "tags") }}
-        <li><a href="{{ .Permalink }}">#{{ .LinkTitle }}</a></li>
-        {{- end }}
-      </ul>
-      {{- end }}
-    </div>
-    {{- end }}
     {{- if (.Param "ShowPostNavLinks") }}
     {{- partial "post_nav_links.html" . }}
     {{- end }}
