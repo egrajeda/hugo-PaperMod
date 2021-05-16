@@ -71,7 +71,8 @@
 }
 
 .post-content h4 {
-    font-size: 16px
+    margin-bottom: 8px;
+    font-size: 18px
 }
 
 .post-content h5 {
