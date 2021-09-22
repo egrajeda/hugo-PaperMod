@@ -32,5 +32,6 @@ a[href^="https://en.wikipedia.org"]:before,
 a[href^="https://es.wikipedia.org"]:before
 {
   font-family: "Line Awesome Brands";
+  padding-right: 4px;
   content: "\f266";
 }
